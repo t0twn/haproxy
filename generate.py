@@ -44,12 +44,6 @@ def parse_args():
     )
 
     parser.add_argument(
-        "--name",
-        "-n",
-        required=True,
-        help="Backend server name",
-    )
-    parser.add_argument(
         "--sni",
         "-s",
         required=True,
@@ -95,7 +89,7 @@ def cfg_backend():
     backend_file = BACKEND_FILE.format(sni=ARGS.sni)
     if ARGS.add:
         backend_head = f"backend B_{ARGS.sni}"
-        backend_conf = BACKEND_CONF.format(name=ARGS.name, host=ARGS.host, port=ARGS.port)
+        backend_conf = BACKEND_CONF.format(name=ARGS.sni, host=ARGS.host, port=ARGS.port)
         lines = [backend_head, backend_conf]
         with open(backend_file, "w") as f:
             for line in lines:

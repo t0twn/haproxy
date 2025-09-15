@@ -52,14 +52,14 @@ def parse_args():
     parser.add_argument(
         "--host",
         "-H",
-        required=True,
-        help="Backend server host",
+        required=False,
+        help="Backend server host (required with --add)",
     )
     parser.add_argument(
         "--port",
         "-p",
-        required=True,
-        help="Backend server port",
+        required=False,
+        help="Backend server port (required with --add)",
     )
     parser.add_argument(
         "--transparent",
@@ -68,7 +68,14 @@ def parse_args():
         action="store_true",
         help="Enable transparent bind",
     )
-    ARGS = parser.parse_args()
+
+    args = parser.parse_args()
+
+    # Validate conditional requirements
+    if args.add and (not args.host or not args.port):
+        parser.error("--host and --port are required when using --add")
+
+    ARGS = args
 
 
 def map_301():

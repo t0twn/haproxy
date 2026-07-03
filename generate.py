@@ -116,14 +116,14 @@ def cfg_main():
     source = "        source 0.0.0.0 usesrc clientip"
     default_web_ssl = "server default_web_ssl"
 
-    ensure_transparent_wildcard = f"grep -qF '{transparent_wildcard}' {CFG_FILE} || sed -i 's/{non_transparent_wildcard}*/{transparent_wildcard}/' {CFG_FILE}"
-    ensure_transparent_wildcard_v6 = f"grep -qF '{transparent_wildcard_v6}' {CFG_FILE} || sed -i 's/{non_transparent_wildcard_v6}*/{transparent_wildcard_v6}/' {CFG_FILE}"
+    ensure_transparent_wildcard = fr"grep -qF '{transparent_wildcard}' {CFG_FILE} || sed -i 's/{non_transparent_wildcard}*/{transparent_wildcard}/' {CFG_FILE}"
+    ensure_transparent_wildcard_v6 = fr"grep -qF '{transparent_wildcard_v6}' {CFG_FILE} || sed -i 's/{non_transparent_wildcard_v6}*/{transparent_wildcard_v6}/' {CFG_FILE}"
 
-    ensure_non_transparent_wildcard = f"grep -qF '{transparent_wildcard}' {CFG_FILE} && sed -i 's/{transparent_wildcard}*/{non_transparent_wildcard}/' {CFG_FILE}"
-    ensure_non_transparent_wildcard_v6 = f"grep -qF '{transparent_wildcard_v6}' {CFG_FILE} && sed -i 's/{transparent_wildcard_v6}*/{non_transparent_wildcard_v6}/' {CFG_FILE}"
+    ensure_non_transparent_wildcard = fr"grep -qF '{transparent_wildcard}' {CFG_FILE} && sed -i 's/{transparent_wildcard}*/{non_transparent_wildcard}/' {CFG_FILE}"
+    ensure_non_transparent_wildcard_v6 = fr"grep -qF '{transparent_wildcard_v6}' {CFG_FILE} && sed -i 's/{transparent_wildcard_v6}*/{non_transparent_wildcard_v6}/' {CFG_FILE}"
 
-    ensure_source = f"grep -qF '{source}' {CFG_FILE} || sed -i '/{default_web_ssl}/i \{source}' {CFG_FILE}"
-    ensure_non_source = f"grep -qF '{source}' {CFG_FILE} && sed -i '/{source}/d' {CFG_FILE}"
+    ensure_source = fr"grep -qF '{source}' {CFG_FILE} || sed -i '/{default_web_ssl}/i \{source}' {CFG_FILE}"
+    ensure_non_source = fr"grep -qF '{source}' {CFG_FILE} && sed -i '/{source}/d' {CFG_FILE}"
 
     cmd_list = [ensure_transparent_wildcard, ensure_transparent_wildcard_v6, ensure_source] if ARGS.transparent else \
         [ensure_non_transparent_wildcard, ensure_non_transparent_wildcard_v6, ensure_non_source]
